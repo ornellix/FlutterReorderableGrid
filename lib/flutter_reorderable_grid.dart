@@ -1,5 +1,9 @@
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+/// A reorderable grid with drag and drop, an iOS-style wiggle animation and
+/// a customizable long-press context menu.
+///
+/// The main entry point is [ReorderableGrid].
+library;
+
+export 'src/context_menu/reorderable_grid_context_menu.dart';
+export 'src/reorderable_grid.dart';
+export 'src/reorderable_grid_typedefs.dart';
