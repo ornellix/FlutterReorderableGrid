@@ -191,9 +191,9 @@ class ReorderableGridContextMenu extends StatelessWidget {
         side: style.borderWidth <= 0
             ? BorderSide.none
             : BorderSide(
-          color: style.borderColor ?? scheme.onSurface.withAlpha(25),
-          width: style.borderWidth,
-        ),
+                color: style.borderColor ?? scheme.onSurface.withAlpha(25),
+                width: style.borderWidth,
+              ),
       ),
       child: Padding(
         padding: style.padding,

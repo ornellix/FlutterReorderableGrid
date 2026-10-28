@@ -58,7 +58,7 @@ class _DemoPageState extends State<DemoPage> {
 
   late List<Tile> _tiles = List.generate(
     _icons.length,
-        (i) => Tile(
+    (i) => Tile(
       id: 'tile-$i',
       label: 'Tile ${i + 1}',
       icon: _icons[i],

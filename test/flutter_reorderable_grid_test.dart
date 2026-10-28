@@ -1,7 +1,4 @@
 import 'package:flutter_reorderable_grid/flutter_reorderable_grid.dart';
-import 'package:flutter_reorderable_grid/src/context_menu/reorderable_grid_context_menu.dart';
-import 'package:flutter_reorderable_grid/src/reorderable_grid.dart';
-import 'package:flutter_reorderable_grid/src/reorderable_grid_typedefs.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -55,8 +52,8 @@ void main() {
   });
 
   testWidgets('dragging an item calls onReorder with the new order', (
-      tester,
-      ) async {
+    tester,
+  ) async {
     List<String>? result;
     await tester.pumpWidget(_app(onReorder: (items) => result = items));
 

@@ -84,9 +84,9 @@ class SingleTouchGate extends SingleChildRenderObjectWidget {
 
   @override
   void updateRenderObject(
-      BuildContext context,
-      covariant RenderSingleTouchGate renderObject,
-      ) {
+    BuildContext context,
+    covariant RenderSingleTouchGate renderObject,
+  ) {
     renderObject
       ..gate = gate
       ..cellKey = cellKey

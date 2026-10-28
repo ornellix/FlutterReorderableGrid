@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -73,14 +74,13 @@ class ReorderableGrid<T extends Object> extends StatefulWidget {
     this.childAspectRatio = 1,
     this.padding = EdgeInsets.zero,
   }) : assert(crossAxisCount > 0),
-        assert(childAspectRatio > 0);
+       assert(childAspectRatio > 0);
 
   @override
   State<ReorderableGrid<T>> createState() => _ReorderableGridState<T>();
 }
 
-class _ReorderableGridState<T extends Object>
-    extends State<ReorderableGrid<T>>
+class _ReorderableGridState<T extends Object> extends State<ReorderableGrid<T>>
     with TickerProviderStateMixin {
   static const _moveDuration = Duration(milliseconds: 220);
   static const _effectDuration = Duration(milliseconds: 180);
@@ -169,20 +169,12 @@ class _ReorderableGridState<T extends Object>
       duration: _effectDuration,
     );
 
-    _wiggleAnimation = Tween<double>(
-      begin: -_wiggleAngle,
-      end: _wiggleAngle,
-    ).animate(
-      CurvedAnimation(
-        parent: _wiggleController,
-        curve: Curves.easeInOut,
-      ),
-    );
+    _wiggleAnimation = Tween<double>(begin: -_wiggleAngle, end: _wiggleAngle)
+        .animate(
+          CurvedAnimation(parent: _wiggleController, curve: Curves.easeInOut),
+        );
 
-    _wiggleListenable = Listenable.merge([
-      _wiggleAnimation,
-      _modeController,
-    ]);
+    _wiggleListenable = Listenable.merge([_wiggleAnimation, _modeController]);
   }
 
   @override
@@ -211,10 +203,10 @@ class _ReorderableGridState<T extends Object>
   // ------------------------------------------------------------------------
 
   bool _openMenu(
-      Object key,
-      List<ReorderableGridContextMenuItem> items,
-      BuildContext cellContext,
-      ) {
+    Object key,
+    List<ReorderableGridContextMenuItem> items,
+    BuildContext cellContext,
+  ) {
     final box = cellContext.findRenderObject();
     if (box is! RenderBox || !box.hasSize) return false;
 
@@ -268,7 +260,8 @@ class _ReorderableGridState<T extends Object>
     final key = _keyFor(item);
     if (_gate.key != null && _gate.key != key) return;
 
-    final menuItems = widget.contextMenuBuilder?.call(item) ??
+    final menuItems =
+        widget.contextMenuBuilder?.call(item) ??
         const <ReorderableGridContextMenuItem>[];
 
     // No menu, or menu already open on this item: start the drag directly.
@@ -310,7 +303,8 @@ class _ReorderableGridState<T extends Object>
   void _onDragUpdate(DragUpdateDetails details) {
     if (!_dragActive && _pendingItem != null) {
       final origin = _holdOrigin;
-      final moved = origin == null ||
+      final moved =
+          origin == null ||
           (details.globalPosition - origin).distance > _moveSlop;
       if (!moved) return;
 
@@ -327,9 +321,7 @@ class _ReorderableGridState<T extends Object>
 
     final original = List<T>.of(widget.items);
 
-    final oldIndex = original.indexWhere(
-          (element) => _sameItem(element, item),
-    );
+    final oldIndex = original.indexWhere((element) => _sameItem(element, item));
 
     if (oldIndex < 0) return;
 
@@ -427,10 +419,11 @@ class _ReorderableGridState<T extends Object>
 
       result.insert(index, item);
 
-      final changed = result.length != _originalItems.length ||
+      final changed =
+          result.length != _originalItems.length ||
           List.generate(
             result.length,
-                (i) => !_sameItem(result[i], _originalItems[i]),
+            (i) => !_sameItem(result[i], _originalItems[i]),
           ).any((different) => different);
 
       if (changed) {
@@ -521,7 +514,8 @@ class _ReorderableGridState<T extends Object>
   }) {
     final cellKey = _keyFor(item);
 
-    final isDraggingItem = _isDragging &&
+    final isDraggingItem =
+        _isDragging &&
         _draggingItem != null &&
         _sameItem(item, _draggingItem as T);
 
@@ -585,11 +579,7 @@ class _ReorderableGridState<T extends Object>
                         duration: _effectDuration,
                         curve: Curves.easeOutCubic,
                         scale: isDraggingItem ? 0.92 : 1,
-                        child: widget.itemBuilder(
-                          context,
-                          item,
-                          index,
-                        ),
+                        child: widget.itemBuilder(context, item, index),
                       ),
                     );
 
@@ -605,10 +595,8 @@ class _ReorderableGridState<T extends Object>
                       // Invisible until the drag is "confirmed".
                       feedback: ValueListenableBuilder<bool>(
                         valueListenable: _feedbackVisible,
-                        builder: (context, visible, child) => Opacity(
-                          opacity: visible ? 1 : 0,
-                          child: child,
-                        ),
+                        builder: (context, visible, child) =>
+                            Opacity(opacity: visible ? 1 : 0, child: child),
                         child: Material(
                           color: Colors.transparent,
                           child: SizedBox(
@@ -618,11 +606,7 @@ class _ReorderableGridState<T extends Object>
                               scale: 1.06,
                               child: Opacity(
                                 opacity: 0.94,
-                                child: widget.itemBuilder(
-                                  context,
-                                  item,
-                                  index,
-                                ),
+                                child: widget.itemBuilder(context, item, index),
                               ),
                             ),
                           ),
@@ -650,13 +634,9 @@ class _ReorderableGridState<T extends Object>
             return child!;
           }
 
-          final angle =
-              _wiggleAnimation.value * math.cos(phase) * strength;
+          final angle = _wiggleAnimation.value * math.cos(phase) * strength;
 
-          return Transform.rotate(
-            angle: angle,
-            child: child,
-          );
+          return Transform.rotate(angle: angle, child: child);
         },
       ),
     );
