@@ -1,0 +1,33 @@
+name: flutter_reorderable_grid
+description: "A reorderable grid for Flutter with drag and drop, iOS-style wiggle animation and a customizable long-press context menu."
+version: 0.0.1
+# TODO: replace TUO_USERNAME with your GitHub username once the repo exists.
+repository: https://github.com/TUO_USERNAME/flutter_reorderable_grid
+issue_tracker: https://github.com/TUO_USERNAME/flutter_reorderable_grid/issues
+
+# Max 5 topics: they help people find the package in pub.dev search.
+topics:
+  - grid
+  - reorderable
+  - drag-and-drop
+  - context-menu
+  - animation
+
+# Uncomment once you have a GIF in screenshots/ (max 10 MB each).
+# screenshots:
+#   - description: Drag and drop with wiggle animation and context menu.
+#     path: screenshots/demo.gif
+
+environment:
+  sdk: ^3.13.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Official Material library, decoupled from the Flutter framework.
+  material_ui: ^1.8.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
